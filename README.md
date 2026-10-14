@@ -1,6 +1,6 @@
 # aiuhd
 
-Photo and video enhancer that runs on your own computer. No cloud, no account. Works without a GPU, slowly.
+Photo and video enhancer that runs on your own computer. It works without a GPU, but slowly.
 
 ```
 pip install .

@@ -42,7 +42,7 @@ def restore(im, big, name="gfpgan", device="cpu", least=0.5, strength=0.8, even=
     # people in the background, and the face model then paints a sharp stranger onto the blur.
     for marks in find(src):
         m = cv2.estimateAffinePartial2D(np.float32(marks * s), TEMPLATE, method=cv2.LMEDS)[0]
-        # ponytail: a face much bigger than the model's 512 px output would come back softer, so it is left alone
+        # a face much bigger than the model's 512 px output would come back softer, so it is left alone
         if m is None or np.hypot(m[0, 0], m[0, 1]) < least:
             continue
         crop = cv2.warpAffine(canvas[:, :, ::-1].clip(0, 255).astype(np.uint8), m, (512, 512), flags=cv2.INTER_CUBIC,
