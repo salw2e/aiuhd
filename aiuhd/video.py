@@ -29,7 +29,7 @@ def enhance(src, out, name, scale, device="cpu", tile=256, face=None, colour=Tru
         sys.exit("ffmpeg not found, install it first (apt install ffmpeg / brew install ffmpeg)")
     w, h, rate, total = probe(src)
     W, H = round(w * scale) // 2 * 2, round(h * scale) // 2 * 2
-    # ponytail: variable frame rate input is resampled to its nominal rate
+    # variable frame rate input is resampled to its nominal rate
     decode = subprocess.Popen(["ffmpeg", "-v", "error", "-i", src, "-vf", f"fps={rate}", "-f", "rawvideo", "-pix_fmt", "rgb24", "pipe:1"],
                               stdout=subprocess.PIPE)
     encode = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", rate,
@@ -50,7 +50,7 @@ def enhance(src, out, name, scale, device="cpu", tile=256, face=None, colour=Tru
                 from .faces import restore
                 big = restore(frame, big, face, device)[0]
             if colour:
-                big = tone(big)     # ponytail: measured per frame, a slow drift in a long shot is possible
+                big = tone(big)     # measured per frame, a slow drift in a long shot is possible
             encode.stdin.write(big.tobytes())
             done += 1
             if progress:
